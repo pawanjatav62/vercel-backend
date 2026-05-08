@@ -15,10 +15,19 @@ const app = express();
 // =====================
 app.use(express.json());
 
+// app.use(cors({
+//   origin: "http://localhost:3000",
+//   methods: ["GET", "POST"],
+//   allowedHeaders: ["Content-Type", "auth-token"],
+// }));s
+
 app.use(cors({
-  origin: "http://localhost:3000",
-  methods: ["GET", "POST"],
-  allowedHeaders: ["Content-Type", "auth-token"],
+  origin: [
+    "http://localhost:3000",
+    "https://vercel-frontend-sigma-five.vercel.app"
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
 }));
 
 // ✅ Logging (ONLY ONCE)
@@ -32,7 +41,7 @@ app.use((req, res, next) => {
 // =====================
 
 mongoose.connect(
-"mongodb://pawanjatav62:jatav123@ac-y3vupma-shard-00-00.xgmijfi.mongodb.net:27017,ac-y3vupma-shard-00-01.xgmijfi.mongodb.net:27017,ac-y3vupma-shard-00-02.xgmijfi.mongodb.net:27017/?ssl=true&replicaSet=atlas-mo85q9-shard-0&authSource=admin&appName=Cluster0"
+  "mongodb://pawanjatav62:jatav123@ac-y3vupma-shard-00-00.xgmijfi.mongodb.net:27017,ac-y3vupma-shard-00-01.xgmijfi.mongodb.net:27017,ac-y3vupma-shard-00-02.xgmijfi.mongodb.net:27017/?ssl=true&replicaSet=atlas-mo85q9-shard-0&authSource=admin&appName=Cluster0"
 )
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.log("Connection Error:", err));
@@ -61,7 +70,8 @@ app.use("/images", express.static("upload/images"));
 app.post("/upload", upload.single("image"), (req, res) => {
   res.json({
     success: true,
-    image_url: `http://localhost:${port}/images/${req.file.filename}`,
+    // image_url: `http://localhost:${port}/images/${req.file.filename}`,
+    image_url: `https://vercel-backend-q3tv.onrender.com/images/${req.file.filename}`,
   });
 });
 
