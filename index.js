@@ -25,7 +25,8 @@ app.use(cors({
   origin: [
     "http://localhost:3000",
     "https://vercel-frontend-sigma-five.vercel.app",
-    "https://ecommerce-admin-lac-two.vercel.app"
+    "https://ecommerce-admin-lac-two.vercel.app",
+    "https://ecommerce-admin-an8zxu97c-pawanjatav6267-8685s-projects.vercel.app"
   ],
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
