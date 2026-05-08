@@ -90,6 +90,29 @@ const Product = mongoose.model("Product", {
   date: { type: Date, default: Date.now },
 });
 
+
+app.post("/removeproduct", async (req, res) => {
+  try {
+
+    await Product.findOneAndDelete({ id: req.body.id });
+
+    console.log("Removed:", req.body.id);
+
+    res.json({
+      success: true,
+      message: "Product Removed"
+    });
+
+  } catch (error) {
+
+    res.status(500).json({
+      success: false,
+      error: error.message
+    });
+
+  }
+});
+
 // =====================
 // Add Product
 // =====================
